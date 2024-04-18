@@ -412,16 +412,20 @@ public function update(Request $request, $id)
     
         // Add more queries here as needed for other data
         $seniorHigh = Scholar::where('account', true)
-            ->whereIn('year_level', ['GRADE 11', 'GRADE 12'])
+            ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY', 'SENIOR HIGH CMDI-TAGUM','SENIOR HIGH SCHOOL REGULAR'])
             ->count();
     
         $highSchool = Scholar::where('account', true)
-            ->whereIn('year_level', ['GRADE 7', 'GRADE 8', 'GRADE 9', 'GRADE 10'])
+            ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL'])
             ->count();
     
         $college = Scholar::where('account', true)
             ->whereIn('year_level', ['FIRST YEAR', 'SECOND YEAR', 'THIRD YEAR', 'FOURTH YEAR', 'FIFTH YEAR'])
             ->count();
+
+            $special = Scholar::where('account', true)
+            ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- COLLEGE', 'SPECIAL SCHOLARSHIP- ELEM', 'SPECIAL SCHOLARSHIP- HS', 'SPECIAL SCHOLARSHIP-DOCTORATE', 'FORBES','CAMIA','BROKENSHIRE'])
+            ->count();           
     
         // Pass all counts to the view
         return view('scholar.index', compact('totalScholars', 'seniorHigh', 'highSchool', 'college'));
