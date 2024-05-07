@@ -6,9 +6,43 @@ use Illuminate\Http\Request;
 use App\Models\Scholar;
 use App\Models\ScholarType;
 use App\Models\Institution;
+use App\Models\Disbursement;
 
 class ScholarController extends Controller
 {
+
+   
+    public function storeDisbursement(Request $request)
+    {
+        // Fetch scholar code based on Scholar_id
+        $scholar = Scholar::findOrFail($request->input('Scholar_id'));
+        $scholarCode = $scholar->scholar_code;
+    
+        // Validate request data
+        $data = $request->validate([
+           
+            'Date' => 'required', 
+            'Date_memo' => 'required',
+            'MemoNumber' => 'required|string',
+            'amount' => 'required|numeric',
+            'return_cmdi' => 'required|numeric',
+            'remarks' => 'nullable|string',
+        ]);
+    
+        // Add the fetched scholar_code to the data array
+        $data['Scholar_code'] = $scholarCode; // Make sure to use correct case here
+    
+        // Create new Disbursement record
+        $newDisbursement = Disbursement::create($data);
+    
+        return redirect()->back()->with('success', 'Disbursement saved successfully!');
+    }
+    
+    
+
+
+
+
     // Returns scholar dashboard
     public function index()
     {   $user = Auth::user();
@@ -41,6 +75,7 @@ class ScholarController extends Controller
         ]);
 
         // Return a response
+         return redirect()->route('scholar.list')->with('error', 'Scholar not found.');
         return response()->json(['message' => 'Disbursement date added successfully'], 200);
     }
 
@@ -87,6 +122,7 @@ class ScholarController extends Controller
                         ->orWhere('fullname', 'like', "%{$searchValue}%")
                         ->orWhere('batch', 'like', "%{$searchValue}%")
                         ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
                         ->orWhere('year_level', 'like', "%{$searchValue}%")
                         ->orWhere('status', 'like', "%{$searchValue}%")
                         ->orWhere('course', 'like', "%{$searchValue}%")
@@ -109,45 +145,7 @@ class ScholarController extends Controller
         ]);
     }
 
-    public function fetchHighSchool(Request $request)
-{
-    $searchValue = $request->input('search.value');
-    $start = $request->input('start');
-    $length = $request->input('length');
-    $page = $request->input('draw');
-
-    $query = Scholar::query()
-        ->where('account', true)
-        ->whereIn('year_level', ['GRADE 7','GRADE 8','GRADE 9','GRADE 10']) // Use whereIn instead of where
-        ->when($searchValue, function ($query, $searchValue) {
-            return $query->where(function ($query) use ($searchValue) {
-                $query->Where('institution', 'like', "%{$searchValue}%")
-                        ->orWhere('unit', 'like', "%{$searchValue}%")
-                        ->orWhere('area', 'like', "%{$searchValue}%")
-                        ->orWhere('fullname', 'like', "%{$searchValue}%")
-                        ->orWhere('batch', 'like', "%{$searchValue}%")
-                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
-                        ->orWhere('year_level', 'like', "%{$searchValue}%")
-                        ->orWhere('status', 'like', "%{$searchValue}%")
-                        ->orWhere('created_at', 'like', "%{$searchValue}%")
-                        ->orWhere('course', 'like', "%{$searchValue}%");
-            });
-        })
-        ->orderBy('created_at', 'desc');
-
-    if ($searchValue) {
-        $page = 1;
-    }
-
-    $data = $query->paginate($length, ['*'], 'page', $page);
-
-    return response()->json([
-        'draw' => intval($request->input('draw')),
-        'recordsTotal' => $data->total(),
-        'recordsFiltered' => $data->total(),
-        'data' => $data->items(),
-    ]);
-}
+   
 
 
 
@@ -160,7 +158,7 @@ class ScholarController extends Controller
 
         $query = Scholar::query()
             ->where('account', true)
-            ->whereIn('year_level', ['GRADE 11','GRADE 12'])
+            ->whereIn('scholarship_type', ['DSHP SENIOR HIGH-CMDI BAY','SENIOR HIGH CMDI-BAY','SENIOR HIGH CMDI-TAGUM','SENIOR HIGH CMDI-TAGUM'])
             ->when($searchValue, function ($query, $searchValue) {
                 return $query->where(function ($query) use ($searchValue) {
                     $query->Where('institution', 'like', "%{$searchValue}%")
@@ -169,6 +167,7 @@ class ScholarController extends Controller
                     ->orWhere('fullname', 'like', "%{$searchValue}%")
                     ->orWhere('batch', 'like', "%{$searchValue}%")
                     ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                    ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
                     ->orWhere('year_level', 'like', "%{$searchValue}%")
                     ->orWhere('status', 'like', "%{$searchValue}%")
                     ->orWhere('created_at', 'like', "%{$searchValue}%")
@@ -193,6 +192,7 @@ class ScholarController extends Controller
     }
 
 
+   
     public function fetchCollege(Request $request)
     {
         $searchValue = $request->input('search.value');
@@ -202,7 +202,7 @@ class ScholarController extends Controller
     
         $query = Scholar::query()
             ->where('account', true)
-            ->whereIn('year_level', ['FIRST YEAR', 'SECOND YEAR', 'THIRD YEAR', 'FOURTH YEAR', 'FIFTH YEAR'])
+            ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'COLLEGE- REGULAR HALF', 'COLLEGE- REGULAR FULL', 'IP-COLLEGE'])
             ->when($searchValue, function ($query, $searchValue) {
                 return $query->where(function ($query) use ($searchValue) {
                     $query->Where('institution', 'like', "%{$searchValue}%")
@@ -211,6 +211,7 @@ class ScholarController extends Controller
                         ->orWhere('fullname', 'like', "%{$searchValue}%")
                         ->orWhere('batch', 'like', "%{$searchValue}%")
                         ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
                         ->orWhere('year_level', 'like', "%{$searchValue}%")
                         ->orWhere('status', 'like', "%{$searchValue}%")
                         ->orWhere('course', 'like', "%{$searchValue}%");
@@ -232,6 +233,207 @@ class ScholarController extends Controller
         ]);
     }
     
+
+    public function fetchBESeniorHigh(Request $request)
+    {
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+    
+        $query = Scholar::query()
+            ->where('account', true)
+            ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL', 'BALIK ESKWELA HIGH SCHOOL IP'])
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc'); // Sort by 'created_at' column in descending order
+    
+        if ($searchValue) {
+            $page = 1;
+        }
+    
+        $data = $query->paginate($length, ['*'], 'page', $page);
+    
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    }
+
+
+
+    public function fetchBECollege(Request $request)
+    {
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+    
+        $query = Scholar::query()
+            ->where('account', true)
+            ->whereIn('scholarship_type', ['BALIK ESKWELA- COLLEGE', 'BALIK ESKWELA- COLLEGE IP'])
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc'); // Sort by 'created_at' column in descending order
+    
+        if ($searchValue) {
+            $page = 1;
+        }
+    
+        $data = $query->paginate($length, ['*'], 'page', $page);
+    
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    }
+    public function fetchDSHPCollege(Request $request)
+    {
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+    
+        $query = Scholar::query()
+            ->where('account', true)
+            ->whereIn('scholarship_type', ['DSHP COLLEGE', 'DSHP COLLEGE- CMDI BAY', 'DSHP COLLEGE- LUZVIMIN', 'DSHP SENIOR HIGH-CMDI BAY', 'DSHP- ANIHAN', 'DSHP- DUAL TECH','COLLEGE CMDI-BAY'])
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc'); // Sort by 'created_at' column in descending order
+    
+        if ($searchValue) {
+            $page = 1;
+        }
+    
+        $data = $query->paginate($length, ['*'], 'page', $page);
+    
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    }
+
+    public function fetchHighSchool(Request $request)
+    {
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+    
+        $query = Scholar::query()
+            ->where('account', true)
+            ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL', 'IP HS-LUZON','IP HS-VIZMIN'])
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc'); // Sort by 'created_at' column in descending order
+    
+        if ($searchValue) {
+            $page = 1;
+        }
+    
+        $data = $query->paginate($length, ['*'], 'page', $page);
+    
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    }
+   
+    public function fetchSpecial(Request $request)
+    {
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+    
+        $query = Scholar::query()
+            ->where('account', true)
+            ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP', 'SPECIAL SCHOLARSHIP- COLLEGE','SPECIAL SCHOLARSHIP- ELEM','SPECIAL SCHOLARSHIP- HS','SPECIAL SCHOLARSHIP-DOCTORATE','BALIK ESKWELA HIGH SCHOOL IP','MBA','SPECIAL SCHOLARSHIP-BAY','SPECIAL SCHOLARSHIP-TAGUM','SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc'); // Sort by 'created_at' column in descending order
+    
+        if ($searchValue) {
+            $page = 1;
+        }
+    
+        $data = $query->paginate($length, ['*'], 'page', $page);
+    
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    }
 
     public function create()
     {
@@ -317,13 +519,18 @@ class ScholarController extends Controller
             return redirect(route('scholar.list'))->with('success', 'Scholar created successfully');
         }
     
-    
-
-    public function show($id)
-    {
-        $scholar = Scholar::findOrFail($id);
-        return view('scholar.info', ['scholar' => $scholar]);
-    }
+        public function show($id)
+        {
+            // Fetch the scholar by ID
+            $scholar = Scholar::findOrFail($id);
+            
+            // Fetch disbursements data for the scholar
+            $disbursements = Disbursement::where('Scholar_code', $scholar->scholar_code)->get();
+        
+            // Pass both scholar and disbursements data to the view
+            return view('scholar.info', compact('scholar', 'disbursements'));
+        }
+        
 
     public function softDelete($id)
     {
@@ -412,23 +619,36 @@ public function update(Request $request, $id)
     
         // Add more queries here as needed for other data
         $seniorHigh = Scholar::where('account', true)
-            ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY', 'SENIOR HIGH CMDI-TAGUM','SENIOR HIGH SCHOOL REGULAR'])
+            ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL', 'SENIOR HIGH CMDI-TAGUM','SENIOR HIGH CMDI-BAY','DSHP SENIOR HIGH- CMDI BAY'])
             ->count();
     
         $highSchool = Scholar::where('account', true)
-            ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL'])
+            ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
             ->count();
     
         $college = Scholar::where('account', true)
-            ->whereIn('year_level', ['FIRST YEAR', 'SECOND YEAR', 'THIRD YEAR', 'FOURTH YEAR', 'FIFTH YEAR'])
+            ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
             ->count();
 
-            $special = Scholar::where('account', true)
-            ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- COLLEGE', 'SPECIAL SCHOLARSHIP- ELEM', 'SPECIAL SCHOLARSHIP- HS', 'SPECIAL SCHOLARSHIP-DOCTORATE', 'FORBES','CAMIA','BROKENSHIRE'])
-            ->count();           
+        $special = Scholar::where('account', true)
+         ->whereIn('scholarship_type', ['FORBES', 'BROKENSHIRE', 'CAMIA', 'SPECIAL SCHOLARSHIP - COLLEGE', 'SPECIAL SCHOLARSHIP - HS','SPECIAL SCHOLARSHIP- ELEM','SPECIAL SCHOLARSHIP-DOCTORATE','MBA','SPECIAL SCHOLARSHIP','SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+        ->count();        
+
+        $BECollege = Scholar::where('account', true)
+         ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE', 'BALIK ESKWELA - COLLEGE IP',])
+        ->count();      
+        $BEHighschool = Scholar::where('account', true)
+         ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL', 'BALIK ESKWELA HIGH SCHOOL IP',])
+        ->count();   
+        $DSHP = Scholar::where('account', true)
+         ->whereIn('scholarship_type', ['DSHP COLLEGE', 'DSHP COLLEGE- CMDI BAY', 'DSHP COLLEGE- LUZVIMIN', 'DSHP- ANIHAN', 'DSHP- DUAL TECH','COLLEGE CMDI-BAY'])
+        ->count();   
+        $CSP2 = Scholar::where('account', true)
+         ->whereIn('scholarship_type', ['CSP 2'])
+        ->count();   
     
         // Pass all counts to the view
-        return view('scholar.index', compact('totalScholars', 'seniorHigh', 'highSchool', 'college'));
+        return view('scholar.index', compact('totalScholars', 'seniorHigh', 'highSchool', 'college','special', 'BECollege', 'BEHighschool','DSHP','CSP2'));
     }
     
   

@@ -16,9 +16,9 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::post('/scholar/add-calendar-entry', [ScholarController::class,'addDisbursementDate'])->name('scholar.add-calendar-entry');
+    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('/scholar/save-disbursement', [ScholarController::class,'storeDisbursement'])->name('scholar.save-disbursement');
+    Route::post('/scholar/add-month-year',[ScholarController::class,'addMonthYear'])->name('scholar.add-month-year');
     Route::get('/scholar',[ScholarController::class,'index'])->name('scholar.index');
     Route::get('/scholar',[ScholarController::class,'dashboard'])->name('scholar.index');
     Route::get('/scholar/list',[ScholarController::class,'list'])->name('scholar.list');

@@ -102,12 +102,12 @@
            </div>
         </div>
         <!-- ./col -->
-
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div  class="small-box bg-green">
             <div class="inner">
-             
+
+                  
             @isset($special)
           <h3>{{number_format( $special) }}</h3>
             @else
@@ -115,6 +115,67 @@
             @endisset
 
               <p>Total Special Scholarship</p>
+       
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="{{ route('scholar.list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+
+            @isset($BEHighschool)
+          <h3>{{ number_format($BEHighschool) }}</h3>
+            @else
+           <h3>0</h3>
+            @endisset
+             
+              <p data-toggle="tooltip" data-placement="bottom" title="total">Total Balik Eskwela High School</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="{{ route('scholar.highschool') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+            @isset($BECollege)
+          <h3>{{ number_format($BECollege) }}</h3>
+            @else
+           <h3>0</h3>
+            @endisset
+             
+              <p>Total Balik Eskwela College</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="{{ route('scholar.college') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+             
+            @isset($DSHP)
+          <h3>{{number_format( $DSHP) }}</h3>
+            @else
+           <h3>0</h3>
+            @endisset
+
+              <p>Total DSHP College</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
@@ -123,6 +184,30 @@
            </div>
         </div>
         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div  class="small-box bg-green">
+            <div class="inner">
+
+                  
+            @isset($CSP2)
+          <h3>{{number_format( $CSP2) }}</h3>
+            @else
+           <h3>0</h3>
+            @endisset
+
+              <p>Total CSP 2</p>
+       
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+            <a href="{{ route('scholar.list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+
+        
       </div>
     
 

@@ -63,46 +63,64 @@
 
   @include('includes/footer') 
   @include('includes/students_modal')  
-  <div id="monthYearModal" class="modal fade" role="dialog">
+ 
+
+  <!-- Add Month and Year Modal -->
+  <div class="modal fade" id="Disbursement" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Select Disbursement Month and Year</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Disbursement</h4>
             </div>
             <div class="modal-body">
-                <form id="monthYearForm">
+            @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+            <form method="post"  action="{{ route('scholar.save-disbursement') }}" >
+                    @csrf
+                    <input type="hidden" id="id" name="Scholar_id">
                     <div class="form-group">
-                        <label for="month">Month:</label>
-                        <select class="form-control" id="month" name="month">
-                        <option value="None" class="form-control" disabled selected>--Make a Selection--</option>
-                            <option value="1  ">January</option>
-                            <option value="2">February</option>
-                            <option value="3">March</option>
-                            <option value="4">April</option>
-                            <option value="5">May</option>
-                            <option value="6">June</option>
-                            <option value="7">July</option>
-                            <option value="8">August</option>
-                            <option value="9">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
+                        <label for="memoNumber">Memo Number:</label>
+                        <input type="text" class="form-control" id="memoNumber" name="MemoNumber"required>
                     </div>
                     <div class="form-group">
-                        <label for="year">Year:</label>
-                        <input type="number" class="form-control" id="year" name="year" min="1900" max="2100" value="2024">
+                       <label for="Date">Date of Memo:</label>
+                       <input type="month" class="form-control" id="Date" name="Date_memo" required>
                     </div>
-                    <input type="hidden" id="scholarId" name="scholarId">
+                    <div class="form-group">
+                       <label for="Date">Date of Disbursement:</label>
+                       <input type="month" class="form-control" id="Date" name="Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Actual Disbursement:</label>
+                        <input type="text" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Return to CMDI:</label>
+                        <input type="text" class="form-control" id="amount" name="return_cmdi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" id="remarks" name="remarks">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="$('#monthYearForm').submit()">Add to Calendar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+
             </div>
         </div>
     </div>
+</div>
 </div>
 
 
@@ -112,3 +130,4 @@
 
  </body>
 </html>
+

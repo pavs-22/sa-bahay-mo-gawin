@@ -64,6 +64,63 @@
   @include('includes/students_modal')  
 
   
+  <!-- Add Month and Year Modal -->
+  <div class="modal fade" id="Disbursement" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Disbursement</h4>
+            </div>
+            <div class="modal-body">
+            @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+            <form method="post"  action="{{ route('scholar.save-disbursement') }}" >
+                    @csrf
+                    <input type="hidden" id="id" name="Scholar_id">
+                    <div class="form-group">
+                        <label for="memoNumber">Memo Number:</label>
+                        <input type="text" class="form-control" id="memoNumber" name="MemoNumber"required>
+                    </div>
+                    <div class="form-group">
+                       <label for="Date">Date of Memo:</label>
+                       <input type="month" class="form-control" id="Date" name="Date_memo" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="Date">Date of Disbursement:</label>
+                       <input type="month" class="form-control" id="Date" name="Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Actual Disbursement:</label>
+                        <input type="text" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Return to CMDI:</label>
+                        <input type="text" class="form-control" id="amount" name="return_cmdi" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" id="remarks" name="remarks">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
  
 </div>
 @include('includes/scripts')

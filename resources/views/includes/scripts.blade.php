@@ -71,9 +71,9 @@ $(function () {
                     "sortable": false,
                     "render": function (data, type, row) {
                         return `
-                            <i class="fa fa-pencil text-primary" onclick="editRecord(${row.id})" style="cursor: pointer;"></i>
-                            <i class="fa fa-trash text-danger" onclick="deleteRecord(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
-                            <i class="fa fa-calendar text-info" onclick="showMonthYearForm(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
+                        <i class="fa fa-pencil text-primary" onclick="editRecord(${row.id})" style="cursor: pointer;"></i>
+                        <i class="fa fa-trash text-danger" onclick="deleteRecord(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
+                        <i class="fa fa-plus-circle text-success" onclick="Disbursement(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
                         `;
                     }
                 }
@@ -86,8 +86,18 @@ $(function () {
     initializeDataTable('highschool', "{{ route('scholar.fetch-high-school') }}");
     initializeDataTable('seniorhigh', "{{ route('scholar.fetch-senior-high') }}");
     initializeDataTable('college', "{{ route('scholar.fetch-college') }}");
+ // Show the modal form when the icon button is clicked
+ $('#addMonthYearButton').click(function () {
+        $('#addMonthYearForm').modal('show');
+    });
 });
 
+function Disbursement(id) {
+    // Set the ID in the hidden input field of the modal
+    document.getElementById('id').value = id;
+    // Show the modal
+    $('#Disbursement').modal('show');
+}
 function viewRecord(id) {
     // Redirect to the details page for the specific record
     window.location.href = "{{ route('scholar.info', ['id' => ':id']) }}".replace(':id', id);
@@ -96,13 +106,6 @@ function viewRecord(id) {
 function editRecord(id) {
     // Redirect to the edit page for the specific record
     window.location.href = "{{ route('scholar.edit', ['id' => ':id']) }}".replace(':id', id);
-}
-
-function showMonthYearForm(scholarId) {
-    // Fill the hidden input with the scholar ID
-    $('#scholarId').val(scholarId);
-    // Show the modal
-    $('#monthYearModal').modal('show');
 }
 
 function deleteRecord(id) {
@@ -129,53 +132,13 @@ function deleteRecord(id) {
         });
     }
 }
-function showMonthYearForm(scholarId) {
 
-    // Fill the hidden input with the scholar ID
-    $('#scholarId').val(scholarId);
-    // Show the modal
-    $('#monthYearModal').modal('show');
-}
-function selectMonth(month) {
-        // Set the selected month in the hidden input
-        $('#month').val(month);
-    }
-    function addCalendarEntry() {
-    // Fetch the scholar ID from the selected data (assuming you have a way to determine it)
-    var scholarId = getScholarIdFromSelectedData(); // Implement this function according to your application logic
-
-    // Set the scholar ID in the hidden input field
-    $('#scholar_id').val(scholarId);
-
-    // Serialize the form data including the CSRF token
-    var formData = $('#monthYearForm').serialize();
-    var csrfToken = $('meta[name="csrf-token"]').attr('content');
-    formData += '&_token=' + csrfToken;
-
-    // Send the AJAX request to add the calendar entry
-    $.ajax({
-        type: "POST",
-        url: "{{ route('scholar.add-calendar-entry') }}",
-        data: formData,
-        success: function (response) {
-            console.log("Calendar entry added successfully");
-
-            // Refresh DataTable
-            ['example1', 'highschool', 'seniorhigh', 'college'].forEach(function (tableId) {
-                $('#' + tableId).DataTable().ajax.reload();
-            });
-        },
-        error: function (xhr, status, error) {
-            console.error("Error adding calendar entry:", error);
-        }
-    });
-
-    // Hide the modal after submitting the form
-    $('#monthYearModal').modal('hide');
-}
 
 
 </script>
+
+
+
 <script>
 
 

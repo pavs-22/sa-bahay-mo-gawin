@@ -28,13 +28,14 @@ return new class extends Migration
             $table->string('status');
             $table->string('remarks');
             $table->boolean('account');
-            $table->date('month_year')->nullable();
             $table->timestamps(); // Adds created_at and updated_at columns
         });
     }
 
-    /**
+      /**
      * Reverse the migrations.
+     *
+     * @return void
      */
     public function down(): void
     {
