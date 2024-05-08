@@ -17,6 +17,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
+
+    Route::get('/scholar/disbursementYear',[ScholarController::class,'disbursementYear'])->name('scholar.disbursementYear');
+    Route::get('/scholar/disbursementMonth',[ScholarController::class,'disbursementMonth'])->name('scholar.disbursementMonth');
+    Route::get('/scholar/list',[ScholarController::class,'list'])->name('scholar.list');
+    Route::get('fetch-disbursement', [ScholarController::class, 'fetchDisbursement'])->name('fetch-disbursement');
+    Route::get('fetch-DisbursementYear', [ScholarController::class, 'fetchDisbursementYear'])->name('fetch-DisbursementYear');
+    Route::get('fetch-DisbursementMonth', [ScholarController::class, 'fetchDisbursementMonth'])->name('fetch-DisbursementMonth');
     Route::post('/scholar/save-disbursement', [ScholarController::class,'storeDisbursement'])->name('scholar.save-disbursement');
     Route::post('/scholar/add-month-year',[ScholarController::class,'addMonthYear'])->name('scholar.add-month-year');
     Route::get('/scholar',[ScholarController::class,'index'])->name('scholar.index');

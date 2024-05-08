@@ -125,9 +125,9 @@
                 <td>{{ $disbursement->MemoNumber }} </td>
                 <td>{{date('F Y', strtotime($disbursement->Date_memo)) }} </td>
                 <td>₱ {{number_format($disbursement->amount)}} </td>
-                <td>₱ {{number_format($disbursement->amount)}} </td>
+                <td>₱ {{number_format($disbursement->return_cmdi)}} </td>
                 <td>{{$scholar->status}} </td>
-                <td>{{$disbursement->remarks}} </td>
+                <td>{{$disbursement->disbursement_remarks}} </td>
                 @endforeach
               </table>
               </div>

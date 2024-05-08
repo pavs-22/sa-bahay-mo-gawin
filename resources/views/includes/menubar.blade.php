@@ -69,8 +69,8 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ route('scholar.college')}}"><i class="fa fa-circle-o"></i>Year</a></li>
-            <li><a href="{{ route('scholar.highschool')}}"><i class="fa fa-circle-o"></i>Month</a></li>
+            <li><a href="{{ route('scholar.disbursementYear')}}"><i class="fa fa-circle-o"></i>Year</a></li>
+            <li><a href="{{ route('scholar.disbursementMonth')}}"><i class="fa fa-circle-o"></i>Month</a></li>
             
             
            

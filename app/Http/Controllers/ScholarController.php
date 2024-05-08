@@ -85,7 +85,83 @@ class ScholarController extends Controller
         $ScholarType = ScholarType::all();
         return view('scholar.disbursement', ['institutions' => $institutions], ['ScholarType' => $ScholarType]);
    
-}
+    }
+    public function fetchDisbursement()
+    {
+          // Fetch data from table2
+    $data2 = Scholar::all();
+
+    // Fetch data from table1 where scholar_code matches any in $data2
+    $data1 = Disbursement::whereIn('scholar_code', $data2->pluck('scholar_code'))->get();
+
+    // Combine data from both tables into a single dataset
+    $combinedData = [
+        'data1' => $data1,
+        'data2' => $data2
+    ];
+    
+    // Return the combined dataset as JSON
+    return response()->json($combinedData);
+    }
+
+    public function disbursementYear()
+    {
+        return view('scholar/disbursement.disbursementYear');
+    
+    }
+    public function disbursementMonth()
+    {
+        return view('scholar/disbursement.disbursementMonth');
+    
+    }
+
+    public function fetchDisbursementYear()
+    {
+       
+        $searchValue = $request->input('search.value');
+        $start = $request->input('start');
+        $length = $request->input('length');
+        $page = $request->input('draw');
+
+        $query = Scholar::query()
+            ->where('account', true)
+            ->when($searchValue, function ($query, $searchValue) {
+                return $query->where(function ($query) use ($searchValue) {
+                    $query->Where('institution', 'like', "%{$searchValue}%")
+                        ->orWhere('unit', 'like', "%{$searchValue}%")
+                        ->orWhere('area', 'like', "%{$searchValue}%")
+                        ->orWhere('fullname', 'like', "%{$searchValue}%")
+                        ->orWhere('batch', 'like', "%{$searchValue}%")
+                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
+                        ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
+                        ->orWhere('year_level', 'like', "%{$searchValue}%")
+                        ->orWhere('status', 'like', "%{$searchValue}%")
+                        ->orWhere('course', 'like', "%{$searchValue}%")
+                        ->orWhere('created_at', 'like', "%{$searchValue}%");
+                });
+            })
+            ->orderBy('created_at', 'desc');
+
+        if ($searchValue) {
+            $page = 1;
+        }
+
+        $data = $query->paginate($length, ['*'], 'page', $page);
+
+        return response()->json([
+            'draw' => intval($request->input('draw')),
+            'recordsTotal' => $data->total(),
+            'recordsFiltered' => $data->total(),
+            'data' => $data->items(),
+        ]);
+    
+    }
+    public function fetchDisbursementMonth()
+    {
+      
+    
+    }
+    
     public function college()
     {
         $institutions = Institution::all();

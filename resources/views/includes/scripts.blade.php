@@ -136,8 +136,52 @@ function deleteRecord(id) {
 
 
 </script>
+<script>
+    $(function () {
+        // Function to initialize DataTable with combined data
+        function initializeDataTable(tableId, routeName) {
+            $.ajax({
+                url: routeName,
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    var combinedData = mergeData(response.data1, response.data2);
+                    $('#' + tableId).DataTable({
+                        data: combinedData,
+                        "responsive": true,
+                        "processing": true,
+                        "serverSide": true,
+                        "ajax": routeName,
+                        "columns": [
+                            { data: 'fullname' },
+                            { data: 'Institution' },
+                            { data: 'area' },
+                            { data: 'unit' },
+                            { data: 'batch' },
+                            { data: 'scholarship_type' },
+                            { data: 'year_level' },
+                            { data: 'MemoNumber' },
+                            { data: 'Date_memo' },
+                            { data: 'amount' },
+                            { data: 'return_cmdi' },
+                            { data: 'status' },
+                            { data: 'disbursement_remarks' },
+                        ]
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data:", error);
+                }
+            });
+        }
 
+        // Initialize DataTable for disbursement data in table with id 'tableDisbursementYear'
+        initializeDataTable('tableDisbursementYear', "{{ route('fetch-disbursement') }}");
 
+        // Initialize DataTable for disbursement data in table with id 'tableDisbursementMonth'
+        initializeDataTable('tableDisbursementMonth', "{{ route('fetch-disbursement') }}");
+    });
+</script>
 
 <script>
 

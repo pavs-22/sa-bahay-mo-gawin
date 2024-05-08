@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('MemoNumber');
             $table->decimal('amount', 10, 2);
             $table->decimal('return_cmdi', 10, 2);
-            $table->string('remarks')->nullable();
+            $table->string('disbursement_remarks')->nullable();
             $table->timestamps();
         });
     }

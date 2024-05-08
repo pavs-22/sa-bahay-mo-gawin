@@ -110,7 +110,7 @@
 
                     <div class="form-group">
                         <label for="remarks">Remarks:</label>
-                        <input type="text" class="form-control" id="remarks" name="remarks">
+                        <input type="text" class="form-control" id="remarks" name="disbursement_remarks">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
