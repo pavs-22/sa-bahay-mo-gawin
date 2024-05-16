@@ -14,7 +14,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        List of All Students
+        College
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -93,11 +93,11 @@
                     </div>
                     <div class="form-group">
                        <label for="Date">Date of Memo:</label>
-                       <input type="month" class="form-control" id="Date" name="Date_memo" required>
+                       <input type="date" class="form-control" id="Date" name="Date_memo" required>
                     </div>
                     <div class="form-group">
                        <label for="Date">Date of Disbursement:</label>
-                       <input type="month" class="form-control" id="Date" name="Date" required>
+                       <input type="date" class="form-control" id="Date" name="Date" required>
                     </div>
                     <div class="form-group">
                         <label for="amount">Actual Disbursement:</label>

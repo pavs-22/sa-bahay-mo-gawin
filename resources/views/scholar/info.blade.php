@@ -28,17 +28,22 @@
           <div class="box">
             <div class="box-header with-border">
               <div class="row">
-                <div class="col-xs-4 text-center">
+                <div class="col-xs-3 text-center">
                   <a href="{{route('scholar.list')}}" data-toggle="modal" class="btn btn-primary btn-sm btn-flat" style="padding: 5px;">
                     <i class="fa fa-list"></i> List
                   </a>
                 </div>
-                <div class="col-xs-4 text-center">
+                <div class="col-xs-3 text-center">
                   <a href="{{ route('scholar.edit', $scholar->id) }}" class="btn btn-success btn-sm btn-flat" style="padding: 5px;">
                     <i class="fa fa-edit"></i> Edit
                   </a>
                 </div>
-                <div class="col-xs-4 text-center">
+                <div class="col-xs-3 text-center">
+                  <a href="#Disbursement" data-toggle="modal" class="btn btn-success btn-sm btn-flat" style="padding: 5px;">
+                    <i class="fa fa-edit"></i> Disburse
+                  </a> 
+                </div>
+                <div class="col-xs-3 text-center">
                   <form method="POST" action="{{ route('scholar.Delete', ['id' => $scholar->id]) }}">
                     @csrf
                     @method('PUT')
@@ -91,6 +96,7 @@
             <div class="box-body">
               <!-- Wrapping div with overflow-x: auto for horizontal scrolling -->
               <div style="overflow-x:auto;">
+             
                 <table id="example1" class="table ">
                   <thead style="background-color: #21ac21">
 
@@ -103,33 +109,37 @@
                   <th style="color: #ffffff">Batch</th>
                   <th style="color: #ffffff">Scholarship Type</th>
 		              <th style="color: #ffffff">Year level</th>
+                  <th style="color: #ffffff">Date of Memo</th>
                   <th style="color: #ffffff">Memo Number</th>
                   <th style="color: #ffffff">Disbursement Date</th>
                   <th style="color: #ffffff">Actual Disbursement</th>
                   <th style="color: #ffffff">Return to CMDI</th>
                   <th style="color: #ffffff">Status</th>
                   <th style="color: #ffffff">Remarks</th>
-                  <th style="color: #ffffff">&nbsp</th>
+                  
                   
             
-                  
+                  @foreach($disbursements as $disbursement)
                 </thead>
-                @foreach($disbursements as $disbursement)
+                <tr>
                 <td>{{$scholar->fullname}}</td>
-                <td>{{$scholar->Institution}} </td>
+                <td>{{$scholar->institution}} </td>
                 <td>{{$scholar->area}} </td>
                 <td>{{$scholar->unit}} </td>
                 <td>{{$scholar->batch}} </td>
                 <td>{{$scholar->scholarship_type}} </td>
                 <td>{{$scholar->year_level}} </td>
+                <td>{{$disbursement->Date_memo }} </td>
                 <td>{{ $disbursement->MemoNumber }} </td>
-                <td>{{date('F Y', strtotime($disbursement->Date_memo)) }} </td>
+                <td>{{$disbursement->Date }} </td>
                 <td>₱ {{number_format($disbursement->amount)}} </td>
                 <td>₱ {{number_format($disbursement->return_cmdi)}} </td>
-                <td>{{$scholar->status}} </td>
+                <td>{{$scholar->status}} </td>  
                 <td>{{$disbursement->disbursement_remarks}} </td>
+                </tr>
                 @endforeach
               </table>
+            
               </div>
             </div>
           </div>
@@ -144,6 +154,62 @@
       
     </section>   
     
+  <!-- Add Month and Year Modal -->
+  <div class="modal fade" id="Disbursement" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Disbursement</h4>
+            </div>
+            <div class="modal-body">
+            @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+            <form method="post"  action="{{ route('scholar.save-disbursement') }}" >
+                    @csrf
+                    <input type="hidden" id="id" name="Scholar_id">
+                    <div class="form-group">
+                        <label for="memoNumber">Memo Number:</label>
+                        <input type="text" class="form-control" id="memoNumber" name="MemoNumber"required>
+                    </div>
+                    <div class="form-group">
+                       <label for="Date">Date of Memo:</label>
+                       <input type="date" class="form-control" id="Date" name="Date_memo" required>
+                    </div>
+                    <div class="form-group">
+                       <label for="Date">Date of Disbursement:</label>
+                       <input type="date" class="form-control" id="Date" name="Date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Actual Disbursement:</label>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Return to CMDI:</label>
+                        <input type="number" class="form-control" id="amount" name="return_cmdi"  required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" id="remarks" name="disbursement_remarks">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
   </div>
 
   @include('includes/footer') 

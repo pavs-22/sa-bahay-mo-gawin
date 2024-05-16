@@ -104,7 +104,7 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div  class="small-box bg-green">
+          <div  class="small-box bg-olive">
             <div class="inner">
 
                   
@@ -120,13 +120,13 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="{{ route('scholar.list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('scholar.special') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-aqua">
+          <div class="small-box bg-purple">
             <div class="inner">
 
             @isset($BEHighschool)
@@ -140,13 +140,13 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="{{ route('scholar.highschool') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('scholar.behighschool') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-fuchsia">
             <div class="inner">
             @isset($BECollege)
           <h3>{{ number_format($BECollege) }}</h3>
@@ -159,14 +159,14 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="{{ route('scholar.college') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('scholar.becollege') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-red">
+          <div class="small-box bg-maroon">
             <div class="inner">
              
             @isset($DSHP)
@@ -180,13 +180,13 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="{{ route('scholar.seniorhigh') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>  
+            <a href="{{ route('scholar.dshpcollege') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>  
            </div>
         </div>
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div  class="small-box bg-green">
+          <div  class="small-box bg-blue">
             <div class="inner">
 
                   
@@ -202,7 +202,7 @@
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
             </div>
-            <a href="{{ route('scholar.list') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('scholar.csp2') }}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

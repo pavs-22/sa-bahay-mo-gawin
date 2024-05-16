@@ -86,6 +86,11 @@ $(function () {
     initializeDataTable('highschool', "{{ route('scholar.fetch-high-school') }}");
     initializeDataTable('seniorhigh', "{{ route('scholar.fetch-senior-high') }}");
     initializeDataTable('college', "{{ route('scholar.fetch-college') }}");
+    initializeDataTable('behighschool', "{{ route('scholar.fetch-behighschool') }}");
+    initializeDataTable('becollege', "{{ route('scholar.fetch-becollege') }}");
+    initializeDataTable('special', "{{ route('scholar.fetch-special') }}");
+    initializeDataTable('dshpcollege', "{{ route('scholar.fetch-dshpcollege') }}");
+    initializeDataTable('csp2', "{{ route('scholar.fetch-csp2') }}");
  // Show the modal form when the icon button is clicked
  $('#addMonthYearButton').click(function () {
         $('#addMonthYearForm').modal('show');
@@ -136,52 +141,68 @@ function deleteRecord(id) {
 
 
 </script>
+
+
+
 <script>
-    $(function () {
-        // Function to initialize DataTable with combined data
-        function initializeDataTable(tableId, routeName) {
-            $.ajax({
-                url: routeName,
-                type: "GET",
-                dataType: "json",
-                success: function (response) {
-                    var combinedData = mergeData(response.data1, response.data2);
-                    $('#' + tableId).DataTable({
-                        data: combinedData,
-                        "responsive": true,
-                        "processing": true,
-                        "serverSide": true,
-                        "ajax": routeName,
-                        "columns": [
-                            { data: 'fullname' },
-                            { data: 'Institution' },
-                            { data: 'area' },
-                            { data: 'unit' },
-                            { data: 'batch' },
-                            { data: 'scholarship_type' },
-                            { data: 'year_level' },
-                            { data: 'MemoNumber' },
-                            { data: 'Date_memo' },
-                            { data: 'amount' },
-                            { data: 'return_cmdi' },
-                            { data: 'status' },
-                            { data: 'disbursement_remarks' },
-                        ]
-                    });
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching data:", error);
+$(function () {
+    // Function to initialize DataTable with filtering
+    function initializeDataTable(tableId,routename) {
+        $('#' + tableId).DataTable({
+            "responsive": true,
+            "processing": true,
+            "serverSide": true,
+            "ajax": routename,
+            "columns": [
+                { "data": "scholar_name" },
+                { "data": "institution" },
+                { "data": "area" },
+                { "data": "unit" },
+                { "data": "batch" },
+                { "data": "scholarship_type" },
+                { "data": "year_level" },
+                { "data": "Date_memo" },
+                { "data": "MemoNumber" },
+                { "data": "Date" },
+                { "data": "amount" },
+                { "data": "return_cmdi" },
+                { "data": "status" },
+                { "data": "disbursement_remarks" },
+                
+                
+                {
+                    "data": null,
+                    "defaultContent": "",
+                    "sortable": false,
+                    "render": function (data, type, row) {
+                        return `
+                        <i class="fa fa-pencil text-primary" onclick="editDisbursement(${row.id})" style="cursor: pointer;"></i>
+                        <i class="fa fa-trash text-danger" onclick="deleteDisbursement(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
+                      
+                        `;
+                    }
                 }
-            });
-        }
+            ]
+        });
+    }
 
-        // Initialize DataTable for disbursement data in table with id 'tableDisbursementYear'
-        initializeDataTable('tableDisbursementYear', "{{ route('fetch-disbursement') }}");
+    // Initialize DataTable
+   
+    initializeDataTable('disbursement', "{{ route('scholar.fetch-disbursement') }}");
 
-        // Initialize DataTable for disbursement data in table with id 'tableDisbursementMonth'
-        initializeDataTable('tableDisbursementMonth', "{{ route('fetch-disbursement') }}");
-    });
+ 
+
+});
+
+
+
+
+
+
+
+
 </script>
+
 
 <script>
 

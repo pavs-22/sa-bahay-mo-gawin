@@ -13,7 +13,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        List of Scholars
+        List of All Scholars
       </h1>
       <ol class="breadcrumb">
         <li><a href="{{ route('scholar.index') }}"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -94,19 +94,19 @@
                     </div>
                     <div class="form-group">
                        <label for="Date">Date of Memo:</label>
-                       <input type="month" class="form-control" id="Date" name="Date_memo" required>
+                       <input type="date" class="form-control" id="Date" name="Date_memo" required>
                     </div>
                     <div class="form-group">
                        <label for="Date">Date of Disbursement:</label>
-                       <input type="month" class="form-control" id="Date" name="Date" required>
+                       <input type="date" class="form-control" id="Date" name="Date" required>
                     </div>
                     <div class="form-group">
                         <label for="amount">Actual Disbursement:</label>
-                        <input type="text" class="form-control" id="amount" name="amount" required>
+                        <input type="number" class="form-control" id="amount" name="amount" required>
                     </div>
                     <div class="form-group">
                         <label for="amount">Return to CMDI:</label>
-                        <input type="text" class="form-control" id="amount" name="return_cmdi" required>
+                        <input type="number" class="form-control" id="amount" name="return_cmdi"  required>
                     </div>
 
                     <div class="form-group">

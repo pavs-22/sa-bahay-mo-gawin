@@ -14,7 +14,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        High School
+        DSHP College
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,7 +36,7 @@
             <div class="box-body">
               <!-- Wrapping div with overflow-x: auto for horizontal scrolling -->
               <div style="overflow-x:auto;">
-                <table id="highschool" class="table table-bordered">
+                <table id="dshpcollege" class="table table-bordered">
                   <thead style="background-color: #21ac21">
 
 <!--                  <th class="hidden"></th>-->
