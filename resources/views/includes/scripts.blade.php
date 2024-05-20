@@ -68,7 +68,7 @@ $(function () {
                 {
                     "data": null,
                     "defaultContent": "",
-                    "sortable": false,
+                    "sortable": true,
                     "render": function (data, type, row) {
                         return `
                         <i class="fa fa-pencil text-primary" onclick="editRecord(${row.id})" style="cursor: pointer;"></i>

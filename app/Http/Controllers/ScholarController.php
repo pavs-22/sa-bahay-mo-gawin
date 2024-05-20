@@ -11,6 +11,59 @@ use App\Models\Disbursement;
 class ScholarController extends Controller
 {
 
+
+    public function addDisbursement()
+{
+    
+   
+    return view('scholar/Disbursement/addDisbursement');
+}
+
+public function saveDisbursement(Request $request)
+{
+    // Fetch scholar code based on Scholar_id
+    $scholar = Scholar::findOrFail($request->input('Scholar_id'));
+    $scholarCode = $scholar->scholar_code;
+    $institution = $scholar->institution;
+    $unit = $scholar->unit;
+    $area = $scholar->area;
+    $scholar_name = $scholar->fullname;
+    $batch = $scholar->batch;
+    $scholarship_type = $scholar->scholarship_type;
+    $year_level = $scholar->year_level;
+    $status = $scholar->status;
+    $account = $scholar->account;
+
+
+
+    // Validate request data
+    $data = $request->validate([
+       
+        'Date' => 'required', 
+        'Date_memo' => 'required',
+        'MemoNumber' => 'required|string',
+        'amount' => 'required|numeric',
+        'return_cmdi' => 'required|numeric',
+        'disbursement_remarks' => 'nullable|string',
+    ]);
+
+    // Add the fetched scholar_code to the data array
+    $data['Scholar_code'] = $scholarCode;
+    $data['institution'] = $institution;
+    $data['unit'] = $unit;
+    $data['area'] = $area;
+    $data['scholar_name'] = $scholar_name;
+    $data['batch'] = $batch;
+    $data['scholarship_type'] = $scholarship_type;
+    $data['year_level'] = $year_level;
+    $data['status'] = $status;
+    $data['account'] = $account; // Make sure to use correct case here
+
+    // Create new Disbursement record
+    $newDisbursement = Disbursement::create($data);
+
+    return view('scholar/info');
+}
    
     public function storeDisbursement(Request $request)
     {
@@ -96,11 +149,9 @@ class ScholarController extends Controller
                         ->orWhere('area', 'like', "%{$searchValue}%")
                         ->orWhere('institution', 'like', "%{$searchValue}%")
                         ->orWhere('batch', 'like', "%{$searchValue}%")
-                        ->orWhere('name_of_member', 'like', "%{$searchValue}%")
                         ->orWhere('scholarship_type', 'like', "%{$searchValue}%")
                         ->orWhere('year_level', 'like', "%{$searchValue}%")
                         ->orWhere('status', 'like', "%{$searchValue}%")
-                        ->orWhere('course', 'like', "%{$searchValue}%")
                         ->orWhere('Date', 'like', "%{$searchValue}%")
                         ->orWhere('Date_memo', 'like', "%{$searchValue}%")
                         ->orWhere('MemoNumber', 'like', "%{$searchValue}%")

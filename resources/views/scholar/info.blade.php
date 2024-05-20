@@ -39,7 +39,7 @@
                   </a>
                 </div>
                 <div class="col-xs-3 text-center">
-                  <a href="#Disbursement" data-toggle="modal" class="btn btn-success btn-sm btn-flat" style="padding: 5px;">
+                  <a href="{{route('scholar.addDisbursement')}}" data-toggle="modal" class="btn btn-success btn-sm btn-flat" style="padding: 5px;">
                     <i class="fa fa-edit"></i> Disburse
                   </a> 
                 </div>
