@@ -704,7 +704,519 @@ public function saveDisbursement(Request $request)
             // Pass both scholar and disbursements data to the view
             return view('scholar.info', compact('scholar', 'disbursements'));
         }
+        public function status()
+        {
+          //$Active = Status::where('status', 'ACTIVE')->count();
+        //$Inactive = Status::where('status', 'INACTIVE')->count();
+        //$GRADUATED = Status::where('status', 'GRADUATED')->count();
+        //$Cancelled = Status::where('status', 'TOTALLY CANCELLED')->count();
+        //$EndContract = Status::where('status', 'END OF CONTRACT')->count();
         
+        $seniorHigh_cmdibay_active = Scholar::where('status', 'ACTIVE')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY'])
+        ->count();
+        $seniorHigh_cmdibay_inactive = Scholar::where('status', 'INACTIVE')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY'])
+        ->count();
+        $seniorHigh_cmdibay_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY'])
+        ->count();
+        $seniorHigh_cmdibay_graduated = Scholar::where('status', 'GRADUATED')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY'])
+        ->count();
+        $seniorHigh_cmdibay_eoc = Scholar::where('status', 'END OF CONTRACT')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-BAY'])
+        ->count();
+
+
+
+
+        $seniorHigh_cmditagum_active = Scholar::where('status', 'ACTIVE')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-TAGUM'])
+        ->count();
+        $seniorHigh_cmditagum_inactive = Scholar::where('status', 'INACTIVE')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-TAGUM'])
+        ->count();
+        $seniorHigh_cmditagum_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-TAGUM'])
+        ->count();
+        $seniorHigh_cmditagum_graduated = Scholar::where('status', 'GRADUATED')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-TAGUM'])
+        ->count();
+        $seniorHigh_cmditagum_eoc = Scholar::where('status', 'END OF CONTRACT')
+        ->whereIn('scholarship_type', ['SENIOR HIGH CMDI-TAGUM'])
+        ->count();
+
+        $seniorHigh_regular_active = Scholar::where('status', 'ACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL'])
+        ->count();
+        $seniorHigh_regular_inactive = Scholar::where('status', 'INACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL'])
+        ->count();
+        $seniorHigh_regular_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+        ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL'])
+        ->count();
+        $seniorHigh_regular_graduated = Scholar::where('status', 'GRADUATED')
+        ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL'])
+        ->count();
+        $seniorHigh_regular_eoc = Scholar::where('status', 'END OF CONTRACT')
+        ->whereIn('scholarship_type', ['REGULAR SENIOR HIGH SCHOOL'])
+        ->count();
+
+
+    $highSchool_active= Scholar::where('status', 'ACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
+        ->count();
+    $highSchool_inactive = Scholar::where('status', 'INACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
+        ->count();
+    $highSchool_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+        ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
+        ->count();
+    $highSchool_graduated = Scholar::where('status', 'GRADUATED')
+        ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
+        ->count();
+    $highSchool_eoc = Scholar::where('status', 'END OF CONTRACT')
+        ->whereIn('scholarship_type', ['REGULAR HIGH SCHOOL','IP HS-LUZON','IP HS-VIZMIN'])
+        ->count();
+        
+
+
+    $college_active = Scholar::where('status', 'ACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
+        ->count();
+    $college_inactive = Scholar::where('status', 'INACTIVE')
+        ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
+        ->count();
+    $college_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+        ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
+        ->count();
+    $college_graduated = Scholar::where('status', 'GRADUATED')
+        ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
+        ->count();
+    $college_eoc = Scholar::where('status', 'END OF CONTRACT')
+        ->whereIn('scholarship_type', ['REGULAR COLLEGE', 'REGULAR COLLEGE - FULL', 'REGULAR COLLEGE - HALF', 'IP-COLLEGE'])
+        ->count();
+        
+
+
+
+    $special_forbes_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['FORBES'])
+    ->count();
+    $special_forbes_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['FORBES'])
+    ->count();
+    $special_forbes_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['FORBES'])
+    ->count();
+    $special_forbes_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['FORBES'])
+    ->count();
+    $special_forbes_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['FORBES'])
+    ->count();        
+
+
+    $special_brokenshire_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['BROKENSHIRE'])
+    ->count();
+    $special_brokenshire_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['BROKENSHIRE'])
+    ->count();
+    $special_brokenshire_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['BROKENSHIRE'])
+    ->count();
+    $special_brokenshire_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['BROKENSHIRE'])
+    ->count();
+    $special_brokenshire_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['BROKENSHIRE'])
+    ->count();
+
+    
+    $special_camia_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['CAMIA'])
+    ->count();
+    $special_camia_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['CAMIA'])
+    ->count();
+    $special_camia_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['CAMIA'])
+    ->count();
+    $special_camia_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['CAMIA'])
+    ->count();
+    $special_camia_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['CAMIA'])
+    ->count();
+
+
+    $special_specialscholarcollege_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - COLLEGE'])
+    ->count();
+    $special_specialscholarcollege_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - COLLEGE'])
+    ->count();
+    $special_specialscholarcollege_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - COLLEGE'])
+    ->count();
+    $special_specialscholarcollege_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - COLLEGE'])
+    ->count();
+    $special_specialscholarcollege_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - COLLEGE'])
+    ->count();
+
+
+    $special_specialscholarhs_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - HS'])
+    ->count();
+    $special_specialscholarhs_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - HS'])
+    ->count();
+    $special_specialscholarhs_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - HS'])
+    ->count();
+    $special_specialscholarhs_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - HS'])
+    ->count();
+    $special_specialscholarhs_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP - HS'])
+    ->count();
+
+
+    $special_specialscholarelem_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- ELEM'])
+    ->count();
+    $special_specialscholarelem_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- ELEM'])
+    ->count();
+    $special_specialscholarelem_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- ELEM'])
+    ->count();
+    $special_specialscholarelem_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- ELEM'])
+    ->count();
+    $special_specialscholarelem_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP- ELEM'])
+    ->count();
+
+
+    $special_specialscholardoc_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-DOCTORATE'])
+    ->count();
+    $special_specialscholardoc_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-DOCTORATE'])
+    ->count();
+    $special_specialscholardoc_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-DOCTORATE'])
+    ->count();
+    $special_specialscholardoc_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-DOCTORATE'])
+    ->count();
+    $special_specialscholardoc_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-DOCTORATE'])
+    ->count();
+
+
+    $special_mba_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['MBA'])
+    ->count();
+    $special_mba_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['MBA'])
+    ->count();
+    $special_mba_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['MBA'])
+    ->count();
+    $special_mba_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['MBA'])
+    ->count();
+    $special_mba_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['MBA'])
+    ->count();
+
+
+    $special_specialscholar_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP'])
+    ->count();
+    $special_specialscholar_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP'])
+    ->count();
+    $special_specialscholar_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP'])
+    ->count();
+    $special_specialscholar_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP'])
+    ->count();
+    $special_specialscholar_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP'])
+    ->count();
+
+
+    $special_specialscholarschola_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+    ->count();
+    $special_specialscholarschola_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+    ->count();
+    $special_specialscholarschola_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+    ->count();
+    $special_specialscholarschola_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+    ->count();
+    $special_specialscholarschola_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+    ->count();
+
+
+    $special_specialscholarbaytagum_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['CMDI BAY/TAGUM'])
+    ->count();
+    $special_specialscholarbaytagum_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['CMDI BAY/TAGUM'])
+    ->count();
+    $special_specialscholarbaytagum_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['CMDI BAY/TAGUM'])
+    ->count();
+    $special_specialscholarbaytagum_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['CMDI BAY/TAGUM'])
+    ->count();
+    $special_specialscholarbaytagum_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['CMDI BAY/TAGUM'])
+    ->count();
+
+
+
+
+
+    $BECollege_becollege_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE'])
+    ->count();
+    $BECollege_becollege_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE'])
+    ->count();
+    $BECollege_becollege_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE'])
+    ->count();
+    $BECollege_becollege_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE'])
+    ->count();
+    $BECollege_becollege_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE'])
+    ->count(); 
+
+
+    $BECollege_collegeip_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE IP'])
+    ->count();
+    $BECollege_collegeip_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE IP'])
+    ->count();
+    $BECollege_collegeip_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE IP'])
+    ->count();
+    $BECollege_collegeip_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE IP'])
+    ->count();
+    $BECollege_collegeip_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - COLLEGE IP'])
+    ->count(); 
+    
+    
+    
+
+
+    $BEHighschool_hs_active  = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL'])
+    ->count();
+    $BEHighschool_hs_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL'])
+    ->count();
+    $BEHighschool_hs_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL'])
+    ->count();
+    $BEHighschool_hs_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL'])
+    ->count();
+    $BEHighschool_hs_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA - HIGH SCHOOL'])
+    ->count();  
+
+
+    $BEHighschool_hsip_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL IP'])
+    ->count();
+    $BEHighschool_hsip_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL IP'])
+    ->count();
+    $BEHighschool_hsip_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL IP'])
+    ->count();
+    $BEHighschool_hsip_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL IP'])
+    ->count();
+    $BEHighschool_hsip_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['BALIK ESKWELA HIGH SCHOOL IP'])
+    ->count();  
+    
+    
+
+
+
+    $DSHP_dshpcollege_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['DSHP COLLEGE'])
+    ->count(); 
+    $DSHP_dshpcollege_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE'])
+    ->count();
+    $DSHP_dshpcollege_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE'])
+    ->count();
+    $DSHP_dshpcollege_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE'])
+    ->count();
+    $DSHP_dshpcollege_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE'])
+    ->count();    
+    
+
+    $DSHP_dshpclcmdibay_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['DSHP COLLEGE- CMDI BAY'])
+    ->count(); 
+    $DSHP_dshpclcmdibay_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- CMDI BAY'])
+    ->count();
+    $DSHP_dshpclcmdibay_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- CMDI BAY'])
+    ->count();
+    $DSHP_dshpclcmdibay_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- CMDI BAY'])
+    ->count();
+    $DSHP_dshpclcmdibay_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- CMDI BAY'])
+    ->count();  
+
+
+    $DSHP_dshpclluzvin_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['DSHP COLLEGE- LUZVIMIN'])
+    ->count(); 
+    $DSHP_dshpclluzvin_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- LUZVIMIN'])
+    ->count();
+    $DSHP_dshpclluzvin_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- LUZVIMIN'])
+    ->count();
+    $DSHP_dshpclluzvin_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- LUZVIMIN'])
+    ->count();
+    $DSHP_dshpclluzvin_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['DSHP COLLEGE- LUZVIMIN'])
+    ->count();  
+
+
+    $DSHP_dshpclani_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['DSHP- ANIHAN'])
+    ->count(); 
+    $DSHP_dshpclani_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['DSHP- ANIHAN'])
+    ->count();
+    $DSHP_dshpclani_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['DSHP- ANIHAN'])
+    ->count();
+    $DSHP_dshpclani_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['DSHP- ANIHAN'])
+    ->count();
+    $DSHP_dshpclani_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['DSHP- ANIHAN'])
+    ->count();  
+
+
+    $DSHP_dshpcldt_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['DSHP- DUAL TECH'])
+    ->count(); 
+    $DSHP_dshpcldt_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['DSHP- DUAL TECH'])
+    ->count();
+    $DSHP_dshpcldt_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['DSHP- DUAL TECH'])
+    ->count();
+    $DSHP_dshpcldt_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['DSHP- DUAL TECH'])
+    ->count();
+    $DSHP_dshpcldt_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['DSHP- DUAL TECH'])
+    ->count();  
+
+
+    $DSHP_dshpclbay_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['COLLEGE CMDI-BAY'])
+    ->count(); 
+    $DSHP_dshpclbay_inactive = Scholar::where('status', 'INACTIVE')
+    ->whereIn('scholarship_type', ['COLLEGE CMDI-BAY'])
+    ->count();
+    $DSHP_dshpclbay_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+    ->whereIn('scholarship_type', ['COLLEGE CMDI-BAY'])
+    ->count();
+    $DSHP_dshpclbay_graduated = Scholar::where('status', 'GRADUATED')
+    ->whereIn('scholarship_type', ['COLLEGE CMDI-BAY'])
+    ->count();
+    $DSHP_dshpclbay_eoc = Scholar::where('status', 'END OF CONTRACT')
+    ->whereIn('scholarship_type', ['COLLEGE CMDI-BAY'])
+    ->count();  
+
+
+
+    $CSP2_active = Scholar::where('status', 'ACTIVE')
+     ->whereIn('scholarship_type', ['CSP 2'])
+    ->count(); 
+    $CSP2_inactive = Scholar::where('status', 'INACTIVE')
+     ->whereIn('scholarship_type', ['CSP 2'])
+    ->count();
+    $CSP2_tc = Scholar::where('status', 'TOTALLY CANCELLED')
+     ->whereIn('scholarship_type', ['CSP 2'])
+    ->count();
+    $CSP2_graduated = Scholar::where('status', 'GRADUATED')
+     ->whereIn('scholarship_type', ['CSP 2'])
+    ->count();
+    $CSP2_eoc = Scholar::where('status', 'END OF CONTRACT')
+     ->whereIn('scholarship_type', ['CSP 2'])
+    ->count();    
+
+
+
+
+
+
+
+        return view('scholar.status', compact('seniorHigh_cmdibay_active', 'seniorHigh_cmdibay_inactive', 'seniorHigh_cmdibay_tc', 'seniorHigh_cmdibay_graduated', 'seniorHigh_cmdibay_eoc','seniorHigh_cmditagum_active', 'seniorHigh_cmditagum_inactive', 'seniorHigh_cmditagum_tc', 'seniorHigh_cmditagum_graduated', 'seniorHigh_cmditagum_eoc','seniorHigh_regular_active', 'seniorHigh_regular_inactive', 'seniorHigh_regular_tc', 'seniorHigh_regular_graduated', 'seniorHigh_regular_eoc',
+        'highSchool_active', 'highSchool_inactive', 'highSchool_tc', 'highSchool_graduated', 'highSchool_eoc',
+        'college_active', 'college_inactive', 'college_tc', 'college_graduated', 'college_eoc',
+        'special_forbes_active', 'special_forbes_inactive', 'special_forbes_tc', 'special_forbes_graduated', 'special_forbes_eoc',
+        'special_brokenshire_active', 'special_brokenshire_inactive', 'special_brokenshire_tc', 'special_brokenshire_graduated', 'special_brokenshire_eoc',
+        'special_camia_active', 'special_camia_inactive', 'special_camia_tc', 'special_camia_graduated', 'special_camia_eoc','special_specialscholarcollege_active', 'special_specialscholarcollege_inactive', 'special_specialscholarcollege_tc', 'special_specialscholarcollege_graduated', 'special_specialscholarcollege_eoc',
+        'special_specialscholarcollege_active', 'special_specialscholarcollege_inactive', 'special_specialscholarcollege_tc', 'special_specialscholarcollege_graduated', 'special_specialscholarcollege_eoc',
+        'special_specialscholarhs_active', 'special_specialscholarhs_inactive', 'special_specialscholarhs_tc', 'special_specialscholarhs_graduated', 'special_specialscholarhs_eoc',
+        'special_specialscholarelem_active', 'special_specialscholarelem_inactive', 'special_specialscholarelem_tc', 'special_specialscholarelem_graduated', 'special_specialscholarelem_eoc',
+        'special_specialscholardoc_active', 'special_specialscholardoc_inactive', 'special_specialscholardoc_tc', 'special_specialscholardoc_graduated', 'special_specialscholardoc_eoc',
+        'special_mba_active', 'special_mba_inactive', 'special_mba_tc', 'special_mba_graduated', 'special_mba_eoc',
+        'special_specialscholar_active', 'special_specialscholar_inactive', 'special_specialscholar_tc', 'special_specialscholar_graduated', 'special_specialscholar_eoc',
+        'special_specialscholarschola_active', 'special_specialscholarschola_inactive', 'special_specialscholarschola_tc', 'special_specialscholarschola_graduated', 'special_specialscholarschola_eoc',
+        'special_specialscholarbaytagum_active', 'special_specialscholarbaytagum_inactive', 'special_specialscholarbaytagum_tc', 'special_specialscholarbaytagum_graduated', 'special_specialscholarbaytagum_eoc',
+        'BECollege_becollege_active', 'BECollege_becollege_inactive', 'BECollege_becollege_tc', 'BECollege_becollege_graduated', 'BECollege_becollege_eoc',
+        'BECollege_collegeip_active', 'BECollege_collegeip_inactive', 'BECollege_collegeip_tc', 'BECollege_collegeip_graduated', 'BECollege_collegeip_eoc',
+        'BEHighschool_hs_active', 'BEHighschool_hs_inactive', 'BEHighschool_hs_tc', 'BEHighschool_hs_graduated', 'BEHighschool_hs_eoc',
+        'BEHighschool_hsip_active', 'BEHighschool_hsip_inactive', 'BEHighschool_hsip_tc', 'BEHighschool_hsip_graduated', 'BEHighschool_hsip_eoc',
+        'DSHP_dshpcollege_active', 'DSHP_dshpcollege_inactive', 'DSHP_dshpcollege_tc', 'DSHP_dshpcollege_graduated', 'DSHP_dshpcollege_eoc',
+        'DSHP_dshpclcmdibay_active', 'DSHP_dshpclcmdibay_inactive', 'DSHP_dshpclcmdibay_tc', 'DSHP_dshpclcmdibay_graduated', 'DSHP_dshpclcmdibay_eoc',
+        'DSHP_dshpclluzvin_active', 'DSHP_dshpclluzvin_inactive', 'DSHP_dshpclluzvin_tc', 'DSHP_dshpclluzvin_graduated', 'DSHP_dshpclluzvin_eoc',
+        'DSHP_dshpclani_active', 'DSHP_dshpclani_inactive', 'DSHP_dshpclani_tc', 'DSHP_dshpclani_graduated', 'DSHP_dshpclani_eoc',
+        'DSHP_dshpcldt_active', 'DSHP_dshpcldt_inactive', 'DSHP_dshpcldt_tc', 'DSHP_dshpcldt_graduated', 'DSHP_dshpcldt_eoc',
+        'DSHP_dshpclbay_active', 'DSHP_dshpclbay_inactive', 'DSHP_dshpclbay_tc', 'DSHP_dshpclbay_graduated', 'DSHP_dshpclbay_eoc',
+        'CSP2_active', 'CSP2_inactive', 'CSP2_tc', 'CSP2_graduated', 'CSP2_eoc'));
+        }
+
 
     public function softDelete($id)
     {
@@ -713,10 +1225,18 @@ public function saveDisbursement(Request $request)
 
         return response()->json(['message' => 'Record soft deleted successfully']);
     }
+
+    public function disbursementdelete($id)
+    {
+        $scholar = Disbursement::findOrFail($id);
+        $scholar->update(['account' => false]);
+
+        return response()->json(['message' => 'Record soft deleted successfully']);
+    }
     
 
     public function Delete($id)
-{
+    {
     $scholar = Scholar::find($id);
     if (!$scholar) {
         return redirect()->route('scholar.list')->with('error', 'Scholar not found.');
@@ -726,7 +1246,7 @@ public function saveDisbursement(Request $request)
     $scholar->update(['account' => false]);
 
     return redirect()->route('scholar.list')->with('success', 'Scholar deleted successfully.');
-}
+    }
 
 public function edit($id)
 {
@@ -739,6 +1259,15 @@ public function edit($id)
         'scholar' => $scholar,
         'institutions' => $institutions,
         'ScholarType' => $ScholarType,
+    ]);
+}
+public function disbursementEdit($id)
+{
+    $disbursement = Disbursement::findOrFail($id);
+    
+    // Consolidate your data into a single array
+    return view('scholar/Disbursement.editDisbursement', [
+        'disbursement' => $disbursement,
     ]);
 }
 
@@ -777,6 +1306,43 @@ public function update(Request $request, $id)
     return redirect()->route('scholar.list')->with('success', 'Scholar updated successfully.');
 }
 
+public function disbursementUpdate(Request $request, $id)
+{
+    $disbursement = Disbursement::findOrFail($id);
+    
+    // Prepare the data, converting empty strings to null
+    $data = array_map(function($item) {
+        return $item === '' ? null : $item;
+    }, $request->all());
+    
+    // Specifically handle each column to ensure it's not null
+    $columnsToCheck = [ 'scholar_name',
+    'institution',
+    'unti',
+    'area',
+    'batch',
+    'scholarship_type',
+    'year_level',
+    'status',
+    'Date' ,
+    'Date_memo',
+    'Memoumber',
+    'amount',
+    'return_cmdi',
+    'disbursement_remarks'
+
+]; // Add other columns here
+    foreach ($columnsToCheck as $column) {
+        if (array_key_exists($column, $data) && $data[$column] === null) {
+            $data[$column] = ''; // Or set it to a default value if appropriate
+        }
+    }
+
+    // Update the scholar with the prepared data
+    $disbursement->update($data);
+ 
+    return redirect()->route('scholar.disbursement')->with('success', 'Scholar updated successfully.');
+}
 
 
     public function profileUpdate(Request $request, $id)
@@ -790,6 +1356,11 @@ public function update(Request $request, $id)
     public function dashboard()
     {
         $totalScholars = Scholar::where('account', true)->count();
+        //$Active = Status::where('status', 'ACTIVE')->count();
+        //$Inactive = Status::where('status', 'INACTIVE')->count();
+        //$GRADUATED = Status::where('status', 'GRADUATED')->count();
+        //$Cancelled = Status::where('status', 'TOTALLY CANCELLED')->count();
+        //$EndContract = Status::where('status', 'END OF CONTRACT')->count();
     
         // Add more queries here as needed for other data
         $seniorHigh = Scholar::where('account', true)
@@ -805,7 +1376,7 @@ public function update(Request $request, $id)
             ->count();
 
         $special = Scholar::where('account', true)
-         ->whereIn('scholarship_type', ['FORBES', 'BROKENSHIRE', 'CAMIA', 'SPECIAL SCHOLARSHIP - COLLEGE', 'SPECIAL SCHOLARSHIP - HS','SPECIAL SCHOLARSHIP- ELEM','SPECIAL SCHOLARSHIP-DOCTORATE','MBA','SPECIAL SCHOLARSHIP','SPECIAL SCHOLARSHIP-SCHOLASTIC'])
+         ->whereIn('scholarship_type', ['FORBES', 'BROKENSHIRE', 'CAMIA', 'SPECIAL SCHOLARSHIP - COLLEGE', 'SPECIAL SCHOLARSHIP - HS','SPECIAL SCHOLARSHIP- ELEM','SPECIAL SCHOLARSHIP-DOCTORATE','MBA','SPECIAL SCHOLARSHIP','SPECIAL SCHOLARSHIP-SCHOLASTIC','CMDI BAY/TAGUM'])
         ->count();        
 
         $BECollege = Scholar::where('account', true)
@@ -825,6 +1396,5 @@ public function update(Request $request, $id)
         return view('scholar.index', compact('totalScholars', 'seniorHigh', 'highSchool', 'college','special', 'BECollege', 'BEHighschool','DSHP','CSP2'));
     }
     
-  
 
 }

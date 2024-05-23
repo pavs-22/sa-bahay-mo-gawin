@@ -176,8 +176,8 @@ $(function () {
                     "sortable": false,
                     "render": function (data, type, row) {
                         return `
-                        <i class="fa fa-pencil text-primary" onclick="editDisbursement(${row.id})" style="cursor: pointer;"></i>
-                        <i class="fa fa-trash text-danger" onclick="deleteDisbursement(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
+                        <i class="fa fa-pencil text-primary" onclick="editdisbursement(${row.id})" style="cursor: pointer;"></i>
+                        <i class="fa fa-trash text-danger" onclick="deletedisbursement(${row.id})" style="cursor: pointer; margin-left: 10px;"></i>
                       
                         `;
                     }
@@ -194,6 +194,32 @@ $(function () {
 
 });
 
+function editdisbursement(id) {
+    // Redirect to the edit page for the specific record
+    window.location.href = "{{ route('scholar.disbursementEdit', ['id' => ':id']) }}".replace(':id', id);
+}
+function deletedisbursement(id) {
+    if (confirm("Are you sure you want to delete this record?")) {
+        $.ajax({
+            type: "PUT",
+            url: "{{ route('scholar.disbursementdelete', ['id' => ':id']) }}".replace(':id', id),
+            data: {
+                _token: '{{ csrf_token() }}'
+            },
+            success: function (response) {
+                // Handle success, e.g., show a success message
+                console.log("Record soft deleted successfully");
+
+                // Reload the current page
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                // Handle error, e.g., show an error message
+                console.error("Error deleting record:", error);
+            }
+        });
+    }
+}
 
 
 

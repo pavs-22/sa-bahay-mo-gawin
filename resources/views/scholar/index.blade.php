@@ -235,6 +235,7 @@
     @include('includes/footer') 
 
 </div>
+
 <!-- ./wrapper -->
 
 <!-- Chart Data -->
