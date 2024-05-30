@@ -18,10 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('/scholar/Disbursement/addDisbursement',[ScholarController::class,'addDisbursement'])->name('scholar.addDisbursement');
+    Route::get('/scholar/Disbursement.{id}/addDisbursement',[ScholarController::class,'addDisbursement'])->name('scholar.addDisbursement');
     Route::get('/scholar/Disbursement/editDisbursement',[ScholarController::class,'editDisbursement'])->name('scholar.editDisbursement');
     Route::get('/scholar/list',[ScholarController::class,'list'])->name('scholar.list');
-    Route::post('/scholar/add-disbursement', [ScholarController::class,'saveDisbursement'])->name('scholar.add-disbursement');
+    Route::post('/scholar/DisbursementAdd', [ScholarController::class,'DisbursementAdd'])->name('scholar.DisbursementAdd');
     Route::get('/scholar/fetch-disbursement', [ScholarController::class, 'fetchDisbursements'])->name('scholar.fetch-disbursement');
     Route::post('/scholar/save-disbursement', [ScholarController::class,'storeDisbursement'])->name('scholar.save-disbursement');
     Route::post('/scholar/add-month-year',[ScholarController::class,'addMonthYear'])->name('scholar.add-month-year');
@@ -52,13 +52,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/scholar/fetch-becollege', [ScholarController::class, 'fetchBECollege'])->name('scholar.fetch-becollege');
     Route::get('/scholar/fetch-dshpcollege', [ScholarController::class, 'fetchDSHPCollege'])->name('scholar.fetch-dshpcollege');
     Route::get('/scholar/fetch-csp2', [ScholarController::class, 'fetchCSP2'])->name('scholar.fetch-csp2');
-
+    Route::get('/scholar/{id}/image', [ScholarController::class, 'generateScholarTableImage'])->name('scholar.generateReport');
     Route::post('/scholar',[ScholarController::class,'store'])->name('scholar.store');
     Route::get('/scholar/{id}/edit',[ScholarController::class,'edit'])->name('scholar.edit');
     Route::get('/scholar/{id}/disbursementEdit',[ScholarController::class,'disbursementEdit'])->name('scholar.disbursementEdit');
-    Route::put('/scholar/{id}/', [ScholarController::class, 'update'])->name('scholar.update');
-    Route::put('/scholar/{id}/', [ScholarController::class, 'disbursementUpdate'])->name('scholar.disbursementUpdate');
+    Route::get('/scholar/{id}/disbursementEdit_info',[ScholarController::class,'disbursementEdit_info'])->name('scholar.disbursementEdit_info');
+    Route::put('/scholar/{id}/update', [ScholarController::class, 'update'])->name('scholar.update');
+    Route::put('/scholar/{id}/Updatedisbursement', [ScholarController::class, 'Updatedisbursement'])->name('scholar.Updatedisbursement');
+    Route::put('/scholar/{id}/', [ScholarController::class, 'disbursementUpdate_info'])->name('scholar.disbursementUpdate_info');
     Route::put('/scholar/soft-delete/{id}', [ScholarController::class, 'softDelete'])->name('scholar.softdelete');
+    Route::put('/scholar/disbursement-soft-delete/{id}', [ScholarController::class, 'disbursementsoftDelete'])->name('scholar.disbursementsoftDelete');
     Route::put('/scholar/disbursement-delete/{id}', [ScholarController::class, 'disbursementdelete'])->name('scholar.disbursementdelete');
     Route::put('/scholar/Delete/{id}', [ScholarController::class, 'Delete'])->name('scholar.Delete');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

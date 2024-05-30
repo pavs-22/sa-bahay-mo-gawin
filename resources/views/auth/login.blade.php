@@ -1,6 +1,6 @@
 <style>
 body{
-	background-image: url("includes/images/background2.jpg");
+	background-image: url("includes/images/Background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -124,8 +124,8 @@ background:#00acee;
 <body>
 <div class="wrapper" style="background-color: #fff">
 <div class="title-text">
-<div class="title login"><img src="includes/images/logo.jpg" style="height: 200px; border-radius: 100%;"></div>
-<div class="title signup"><img src="includes/images/logo.jpg" style="height: 200px; border-radius: 100%"></div>
+<div class="title login"><img src="includes/images/CMDIlogo.png" style="height: 200px; border-radius: 100%;"></div>
+<div class="title signup"><img src="includes/images/CMDIlogo.png" style="height: 200px; border-radius: 100%"></div>
 </div>
 <div class="form-container">
 <div class="slide-controls">

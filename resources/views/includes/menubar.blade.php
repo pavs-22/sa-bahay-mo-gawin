@@ -70,7 +70,7 @@
          
         </li>
         <li><a href="{{ route('scholar.disbursement')}}"><i class="fa fa-files-o"></i> <span>Disbursement of Allowance</span></a></li>
-        <li><a href="{{ route('scholar.status')}}"><i class="fa fa-files-o"></i> <span>Status</span></a></li>
+        <li><a href="{{ route('scholar.status')}}"><i class="fa fa-files-o"></i> <span>Report Card</span></a></li>
         <!--li><a href="#"><i class="fa fa-clock-o"></i> <span>Summary Report</span></a></li-->
       </ul>
       

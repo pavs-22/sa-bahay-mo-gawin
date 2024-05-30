@@ -154,7 +154,7 @@ $(function () {
             "serverSide": true,
             "ajax": routename,
             "columns": [
-                { "data": "scholar_name" },
+                { "data": "scholar_name"},
                 { "data": "institution" },
                 { "data": "area" },
                 { "data": "unit" },
@@ -164,8 +164,14 @@ $(function () {
                 { "data": "Date_memo" },
                 { "data": "MemoNumber" },
                 { "data": "Date" },
-                { "data": "amount" },
-                { "data": "return_cmdi" },
+                { 
+                    "data": "amount",
+                    "render": $.fn.dataTable.render.number(',', '.', 2, '₱')
+                },
+                { 
+                    "data": "return_cmdi",
+                    "render": $.fn.dataTable.render.number(',', '.', 2, '₱')
+                },
                 { "data": "status" },
                 { "data": "disbursement_remarks" },
                 
@@ -173,7 +179,7 @@ $(function () {
                 {
                     "data": null,
                     "defaultContent": "",
-                    "sortable": false,
+                    "sortable": true,
                     "render": function (data, type, row) {
                         return `
                         <i class="fa fa-pencil text-primary" onclick="editdisbursement(${row.id})" style="cursor: pointer;"></i>
@@ -202,7 +208,7 @@ function deletedisbursement(id) {
     if (confirm("Are you sure you want to delete this record?")) {
         $.ajax({
             type: "PUT",
-            url: "{{ route('scholar.disbursementdelete', ['id' => ':id']) }}".replace(':id', id),
+            url: "{{ route('scholar.disbursementsoftDelete', ['id' => ':id']) }}".replace(':id', id),
             data: {
                 _token: '{{ csrf_token() }}'
             },
@@ -210,7 +216,7 @@ function deletedisbursement(id) {
                 // Handle success, e.g., show a success message
                 console.log("Record soft deleted successfully");
 
-                // Reload the current page
+                // Refresh DataTable
                 location.reload();
             },
             error: function (xhr, status, error) {
@@ -218,6 +224,7 @@ function deletedisbursement(id) {
                 console.error("Error deleting record:", error);
             }
         });
+   
     }
 }
 

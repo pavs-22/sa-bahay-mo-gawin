@@ -19,7 +19,7 @@
     <!-- Main content -->
     <section class="content">
       <!-- ADD Disbursement Form -->
-      <form method="post" action="{{ route('scholar.disbursementUpdate', ['id' => $disbursement->id]) }}}">
+      <form method="post" action="{{ route('scholar.Updatedisbursement', ['id' => $disbursement->id]) }}">
         @csrf
         @method('put')
         <input type="hidden" id="id" name="Scholar_id">
